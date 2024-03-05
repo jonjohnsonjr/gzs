@@ -56,13 +56,12 @@ func index() error {
 	}
 	for {
 		// Make sure we hit the end.
-		hdr, err := indexer.Next()
+		_, err := indexer.Next()
 		if errors.Is(err, io.EOF) {
 			break
 		} else if err != nil {
 			return fmt.Errorf("indexer.Next: %w", err)
 		}
-		log.Printf("index %s", hdr.Name)
 	}
 
 	toc, err := indexer.TOC()
